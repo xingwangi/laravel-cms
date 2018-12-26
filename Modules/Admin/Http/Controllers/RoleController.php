@@ -17,7 +17,8 @@ class RoleController extends Controller
      */
     public function index()
     {
-        $roles = Role::get();
+
+        $roles = Role::where('name','!=',config('hd_module.webmaster'))->get();
         return view('admin::role.index', compact('roles'));
     }
 
@@ -58,8 +59,11 @@ class RoleController extends Controller
      * Remove the specified resource from storage.
      * @return Response
      */
-    public function destroy()
+    public function destroy(Role $role)
     {
+        $role->delete();
+        session()->flash('success', '删除成功');
+        return back();
     }
 
 

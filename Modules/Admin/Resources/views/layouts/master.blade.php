@@ -10,10 +10,11 @@
     <link rel="stylesheet" href="/css/font-awesome.min.css">
     <script src="/js/jquery.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
-    <script src="https://cdn.bootcss.com/jquery.pjax/2.0.1/jquery.pjax.min.js">
-    </script>
+    <script src="/js/vue.min.js"></script>
+    <script src="/js/jquery.pjax.min.js"></script>
     <script src="{{asset('plugin/pjax/pjax.js')}}"></script>
     <link rel="stylesheet" href="{{asset('plugin/pjax/pjax.css')}}">
+
     <style>
         .system {
             /*background: url(system_bg.jpg);*/
@@ -83,11 +84,10 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">
                             <i class="fa fa-w fa-user"></i>
-                            admin <span class="caret"></span>
+                            {{auth()->user()->nickname}} <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu">
                             <li><a href="/admin/password/reset">我的帐号</a></li>
-
                             <li><a href="?s=system/manage/menu">系统选项</a></li>
 
                             <li role="separator" class="divider">
@@ -111,63 +111,9 @@
         <!--主体-->
         <div class="container-fluid admin_menu">
             <div class="row">
-                <div class="col-xs-12 col-sm-3 col-lg-2 left-menu">
-
-                    <!--扩展模块动作 start-->
-                    <div class="panel panel-default" style="border-top: 1px solid #ccc;">
-
-                    @foreach(app('hd-menu')->all() as$moduleName  =>$groups)
-
-                        <!--系统菜单-->
-                            <div class="panel-heading">
-                                <h4 class="panel-title" id="admin"><span
-                                        class="glyphicon glyphicon-user"></span>{{$moduleName}}</h4>
-                            </div>
-                            <ul class="list-group menus" style="display: none">
-                                @foreach($groups as $group)
-
-                                    <div class="dropdown panel-heading">
-                                        <button type="button" class="btn dropdown-toggle" id="dropdownMenu1"
-                                                data-toggle="dropdown"><i
-                                                class="{{$group['icon']}}"></i>{{$group['title']}}
-                                            <span class="caret"></span>
-                                        </button>
-                                        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                                            @foreach($group['menus'] as $menu)
-
-                                                @can($menu['permission'])
-                                                    <li>
-                                                        <a href="{{$menu['url']}}">{{$menu['title']}}</a>
-                                                    </li>
-                                                @endcan
-                                            @endforeach
-
-                                        </ul>
-                                    </div>
-                                @endforeach
-
-                            </ul>
-
-                        @endforeach
-
-
-                        <script>
-                            // 菜单切换
-                            $(".panel-title").click(function () {
-                                $(".list-group").hide();
-                                $(this).parent().next().toggle(500);
-                            });
-
-                        </script>
-
-                    </div>
-                </div>
-
+                @include('admin::layouts._menus')
 
                 <div class="col-xs-12 col-sm-9 col-lg-10">
-                    @include('layouts._validate')
-                    @include('layouts._message')
-
 
                     <div class="main-content container-fluid" id="pjax-container">
                         <!--pjax加载动画-->
@@ -182,6 +128,8 @@
                         </div>
                         <!--pjax加载动画 结束-->
                         <div id="app">
+                            @include('layouts._validate')
+                            @include('layouts._message')
                             @yield('content')
                         </div>
                     </div>

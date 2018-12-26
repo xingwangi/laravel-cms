@@ -16,12 +16,13 @@ return [
     'Admin' => [
         "title" => "系统管理",
         "icon" => "fa fa-navicon",
-        'permission' => '权限标识',
+        'permission' => ['Modules\Admin\Http\Controllers\RoleController@index'],
         "menus" => [
-            ["title" => "微信配置", "permission" => "Modules\Admin\Http\Controllers\WechatController@create", "url" => "链接地址"],
-            ["title" => "网站配置", "permission" => "Modules\Admin\Http\Controllers\SystemController@create", "url" => "链接地址"],
-            ["title" => "邮件配置", "permission" => "Modules\Admin\Http\Controllers\UserController@create", "url" => "链接地址"],
-            ["title" => "权限配置", "permission" => "Modules\Admin\Http\Controllers\RoleController@create", "url" => "/admin/role"],
+            ["title" => "角色管理   ", "permission" => "Modules\Admin\Http\Controllers\RoleController@index", "url" => "/admin/role"],
+//            ["title" => "修改列表", "permission" => "Modules\Admin\Http\Controllers\RoleController@edit", "url" => "链接地址"],
+//            ["title" => "删除角色", "permission" => "Modules\Admin\Http\Controllers\RoleController@destroy", "url" => "链接地址"],
+//            ["title" => "添加角色", "permission" => "Modules\Admin\Http\Controllers\RoleController@create", "url" => "/admin/role"],
+//            ["title" => "权限配置", "permission" => "Modules\Admin\Http\Controllers\RoleController@permission", "url" => "/admin/role"],
         ],
 
     ],

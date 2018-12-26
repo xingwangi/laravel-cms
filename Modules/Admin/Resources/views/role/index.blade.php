@@ -48,7 +48,10 @@
                             <td>
                                 <div class="btn-group">
                                     <a href="/admin/role/permission/{{$role->id}}" class="btn btn-primary btn-sm">权限</a>
-                                    <button type="button" class="btn btn-danger btn-sm">删除</button>
+                                    <button type="button" onclick="delRole({{$role->id}},this)" class="btn btn-danger btn-sm">删除</button>
+                                    <form action="/admin/role/{{$role['id']}}" hidden method="POST" role="form">
+                                         @csrf @method('DELETE')
+                                    </form>
                                     <button type="button" data-toggle="modal" data-target="#editRole{{$role['id']}}"
                                             class="btn btn-success btn-sm">编辑
                                     </button>
@@ -83,5 +86,14 @@
             </div>
         @endslot
     @endcomponent
+    <script>
+          function delRole(id,bt) {
+              if (confirm('确认删除吗')){
+                  $(bt).next('form').trigger('submit');
+              }
+
+          }
+    </script>
 @endsection
+
 
