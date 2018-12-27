@@ -12,6 +12,7 @@
         "barryvdh/laravel-ide-helper": "^2.5",
         "caouecs/laravel-lang": "~3.0",
         "fideloper/proxy": "^4.0",
+        "houdunwang/arr": "^2.0",
         "houdunwang/laravel-module": "^1.0",
         "laravel/framework": "5.7.*",
         "laravel/tinker": "^1.0",
